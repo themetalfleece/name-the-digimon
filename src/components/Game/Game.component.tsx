@@ -13,7 +13,7 @@ export const Game: Component = () => {
       <Header>Name the Digimon</Header>
       <Show
         when={round.digimon && round.state !== "init"}
-        fallback={<h2>Loading...</h2>}
+        fallback={<h2>Downloading Digimon Data...</h2>}
       >
         <DigimonAvatar
           src={round.digimon!.imageUrl}
