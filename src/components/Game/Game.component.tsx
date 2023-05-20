@@ -1,15 +1,11 @@
 import { Component, For, JSXElement } from "solid-js";
 import { Container, DigimonAvatar, Header, NameContainer } from "./Game.styles";
+import { getObscurifiedName } from "../../features/obsurifiedName/getObscurifiedName.util";
 
 export const Game: Component = () => {
   const imageUrl = "https://digimon-api.com/images/digimon/w/Garurumon.png";
   const digimonName = "Beelzemon (X Antibody)";
-  const digimonNameData = digimonName.split("").map((letter) => ({
-    letter,
-    isRevealed: Math.random() > 0.5,
-  }));
-
-  console.log(digimonNameData);
+  const obscurifiedName = getObscurifiedName(digimonName);
 
   return (
     <Container>
@@ -17,7 +13,7 @@ export const Game: Component = () => {
       <DigimonAvatar src={imageUrl} alt="Image of the Digimon to find" />
 
       <NameContainer>
-        <For each={digimonNameData}>
+        <For each={obscurifiedName}>
           {({ letter, isRevealed }): JSXElement => (
             <div>{isRevealed ? letter : "_"}</div>
           )}
