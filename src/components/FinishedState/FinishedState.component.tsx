@@ -32,7 +32,9 @@ export const FinishedState: Component = () => {
         </Text>
       </Show>
 
-      <Button onClick={nextRound}>Continue</Button>
+      <Button variant="success" onClick={nextRound}>
+        Continue
+      </Button>
 
       <Text fontSize={26}>#946 - Adult</Text>
 
