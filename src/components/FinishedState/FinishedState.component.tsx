@@ -1,4 +1,4 @@
-import { Component, Show, onMount } from 'solid-js';
+import { Component, Show, onCleanup, onMount } from 'solid-js';
 import { useRound } from '../../features/round/round.store';
 import { Text } from '../../lib/Text/Text.component';
 import { Button } from '../../lib/Button/Button.component';
@@ -16,7 +16,7 @@ export const FinishedState: Component = () => {
 
     window.addEventListener('keydown', callback);
 
-    return () => window.removeEventListener('keydown', callback);
+    onCleanup(() => window.removeEventListener('keydown', callback));
   });
 
   return (
