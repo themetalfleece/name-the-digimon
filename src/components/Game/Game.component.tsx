@@ -1,9 +1,10 @@
-import { Component, For, JSXElement, Show } from "solid-js";
-import { Container, DigimonAvatar, Header, NameContainer } from "./Game.styles";
+import { Component, Show } from "solid-js";
+import { Container, DigimonAvatar, Header } from "./Game.styles";
 import { useRound } from "../../features/round/round.store";
 import { OnScreenKeyboard } from "../OnScreenKeyboard/OnScreenKeyboard.component";
 import { Text } from "../Text/Text.component";
 import { maxFailedAttempts } from "../../features/round/round.constants";
+import { GuessingName } from "../GuessingName/GuessingName.component";
 
 export const Game: Component = () => {
   const { round } = useRound();
@@ -17,15 +18,7 @@ export const Game: Component = () => {
           alt="Image of the Digimon to find"
         />
 
-        <NameContainer>
-          <For each={round.obscurifiedName}>
-            {({ letter, isRevealed }): JSXElement => (
-              <div style={{ "font-weight": 500 }}>
-                {isRevealed ? letter : "_"}
-              </div>
-            )}
-          </For>
-        </NameContainer>
+        <GuessingName />
 
         <OnScreenKeyboard />
 
