@@ -10,6 +10,7 @@ const theme = {
     background: "#030303",
     white: "#fefefe",
     black: "#030303",
+    disabled: `#9e9e9e`,
   },
 };
 
