@@ -14,7 +14,7 @@ export const PlayingState: Component = () => {
         onLetterSelected={selectLetter}
       />
       <Text
-        color={round.remainingAttempts > 1 ? 'success' : 'error'}
+        color={round.remainingAttempts > 0 ? 'success' : 'error'}
         fontSize={28}
       >
         Security: {round.remainingAttempts}/{maxFailedAttempts}

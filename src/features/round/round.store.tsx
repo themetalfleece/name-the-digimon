@@ -118,7 +118,7 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
       guessedLetters: [...round.guessedLetters, letter.toLowerCase()],
     });
 
-    if (round.remainingAttempts <= 0) {
+    if (round.remainingAttempts < 0) {
       setRound({
         state: 'lost',
       });
