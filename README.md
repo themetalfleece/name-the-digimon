@@ -7,6 +7,8 @@ It keeps total stats and every time you get a new Digimon!
 
 ## Usage
 
+This project is built with SolidJS.
+
 ```bash
 yarn
 ```

@@ -1,7 +1,7 @@
 {
   "name": "name-the-digimon",
   "version": "0.0.0",
-  "description": "A game where you have to find the name of Digimon",
+  "description": "A game where you have to find the name of Digimon from its picture",
   "scripts": {
     "start": "vite",
     "dev": "vite",
