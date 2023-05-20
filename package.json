@@ -1,7 +1,7 @@
 {
-  "name": "vite-template-solid",
+  "name": "name-the-digimon",
   "version": "0.0.0",
-  "description": "",
+  "description": "A game where you have to find the name of Digimon",
   "scripts": {
     "start": "vite",
     "dev": "vite",
