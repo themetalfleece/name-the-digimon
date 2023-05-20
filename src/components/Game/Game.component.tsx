@@ -7,7 +7,7 @@ import { maxFailedAttempts } from "../../features/round/round.constants";
 import { GuessingName } from "../GuessingName/GuessingName.component";
 
 export const Game: Component = () => {
-  const { round } = useRound();
+  const { round, selectLetter } = useRound();
 
   return (
     <Container>
@@ -23,10 +23,13 @@ export const Game: Component = () => {
 
         <GuessingName />
 
-        <OnScreenKeyboard />
+        <OnScreenKeyboard
+          disabledLetters={round.guessedLetters}
+          onLetterSelected={selectLetter}
+        />
 
         <Text
-          color={round.remainingAttempts === 1 ? "error" : "success"}
+          color={round.remainingAttempts > 1 ? "success" : "error"}
           fontSize={28}
         >
           Security: {round.remainingAttempts}/{maxFailedAttempts}

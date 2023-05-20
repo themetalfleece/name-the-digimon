@@ -13,6 +13,7 @@ import { maxFailedAttempts } from "./round.constants";
 
 type RoundValue = {
   round: Round;
+  selectLetter: (letter: string) => void;
 };
 
 const RoundContext = createContext<RoundValue>();
@@ -64,8 +65,56 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
     localStorage.setItem("round", JSON.stringify(round));
   });
 
+  const selectLetter: RoundValue["selectLetter"] = (letter: string) => {
+    if (round.state !== "playing") {
+      return;
+    }
+
+    if (round.guessedLetters.includes(letter)) {
+      return;
+    }
+
+    let isLetterFound = false;
+
+    const obscurifiedName = round.obscurifiedName.map((entry) => {
+      if (
+        entry.isRevealed ||
+        entry.letter.toLowerCase() !== letter.toLowerCase()
+      ) {
+        return entry;
+      }
+
+      isLetterFound = true;
+
+      return {
+        ...entry,
+        isRevealed: true,
+      };
+    });
+
+    setRound("obscurifiedName", obscurifiedName);
+
+    setRound({
+      guessedLetters: [...round.guessedLetters, letter.toLowerCase()],
+    });
+
+    if (!isLetterFound) {
+      setRound((currentRound) => ({
+        failedAttempts: currentRound.failedAttempts + 1,
+        remainingAttempts: currentRound.remainingAttempts - 1,
+      }));
+    }
+
+    if (round.remainingAttempts <= 0) {
+      setRound({
+        state: "lost",
+      });
+    }
+  };
+
   const value: RoundValue = {
     round,
+    selectLetter,
   };
 
   return (
