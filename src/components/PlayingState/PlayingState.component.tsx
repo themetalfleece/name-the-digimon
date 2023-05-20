@@ -17,7 +17,9 @@ export const PlayingState: Component = () => {
         color={round.remainingAttempts > 0 ? 'success' : 'error'}
         fontSize={28}
       >
+        {round.remainingAttempts === 0 && '⚠️'}
         Security: {round.remainingAttempts}/{maxFailedAttempts}
+        {round.remainingAttempts === 0 && '⚠️'}
       </Text>
     </Show>
   );
