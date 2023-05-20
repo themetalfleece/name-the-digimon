@@ -8,6 +8,7 @@ const theme = {
     success: "#07eb0d",
     error: "#f6214e",
     background: "#030303",
+    white: "#fefefe",
   },
 };
 
@@ -30,6 +31,7 @@ const GlobalStyles = () => {
   const Styles = createGlobalStyles`
     html,
     body {
+      color: ${theme.colors.white};
       background-color: ${theme.colors.background};
     }
   `;
