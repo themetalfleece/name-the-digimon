@@ -32,6 +32,10 @@ const GlobalStyles = () => {
       background-color: ${theme.colors.background};
     }
 
+    a {
+      color: ${theme.colors.success};
+    }
+
     * {
       font-family: 'Roboto Mono', monospace;
     }
