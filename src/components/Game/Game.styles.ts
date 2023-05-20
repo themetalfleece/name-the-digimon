@@ -13,5 +13,6 @@ export const Header = styled('h1')`
 
 export const DigimonAvatar = styled('img')`
   border-radius: 18px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 360px;
 `;
