@@ -6,7 +6,8 @@ import { Text } from '../../lib/Text/Text.component';
 export const ProgressSummary: Component = () => {
   const { correctGuesses, totalGuesses, playedIds } = useProgress();
 
-  const guessPercentage = () => correctGuesses() / totalGuesses() || 0;
+  const guessPercentage = () =>
+    Math.round((correctGuesses() / totalGuesses() || 0) * 100);
   const digimonLeft = () => totalDigimon - playedIds().length;
 
   return (
