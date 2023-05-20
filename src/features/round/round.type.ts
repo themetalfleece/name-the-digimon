@@ -5,6 +5,7 @@ export interface Round {
     id: number;
     name: string;
     imageUrl: string;
+    level: string;
     description?: string;
   };
   obscurifiedName: ObscurifiedName;

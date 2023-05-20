@@ -35,10 +35,11 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
   const playNewDigimon = async () => {
     setRound("state", "init");
 
-    const digimon = {
+    const digimon: Round["digimon"] = {
       id: 946,
       name: "Garurumon",
       imageUrl: "https://digimon-api.com/images/digimon/w/Garurumon.png",
+      level: "Adult",
       description: `Covered in blue, white, and silver-colored fur, it is a Beast Digimon with an appearance resembling a wolf. That fur is as hard as "Mithril", which is said to be a legendary rare metal, and since the blades growing from the tips of its shoulders have sharp edges, anything that touches them is cut to pieces. As it possesses a furious combat instinct and muscles honed in freezing lands, as well as carnivore-like agility and the accuracy to reliably bring down its targets, it is a being feared by other Digimon. However, it is extremely intelligent, and it faithfully obeys those whom it recognizes as its master or leader. Its Special Move is blue, high-temperature flames spewed from its mouth (Fox Fire).`,
     };
 

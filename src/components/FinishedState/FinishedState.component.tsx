@@ -36,7 +36,9 @@ export const FinishedState: Component = () => {
         Continue
       </Button>
 
-      <Text fontSize={26}>#946 - Adult</Text>
+      <Text fontSize={26}>
+        #{round.digimon?.id} - {round.digimon?.level}
+      </Text>
 
       <Show when={round.digimon?.description}>
         <DescriptionContainer>
