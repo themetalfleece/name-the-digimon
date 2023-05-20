@@ -26,5 +26,42 @@ export const getObscurifiedName = (name: string): ObscurifiedName => {
     }
   }
 
+  // reveal all characters in between parenthesis
+  for (
+    let currentLetterIndex = 0;
+    currentLetterIndex < obscurifiedName.length;
+    currentLetterIndex++
+  ) {
+    const letter = obscurifiedName[currentLetterIndex];
+
+    if (letter.letter !== "(") {
+      continue;
+    }
+
+    let closingParenthesisIndex = -1;
+    for (
+      let targetIndex = currentLetterIndex + 1;
+      targetIndex < obscurifiedName.length;
+      targetIndex++
+    ) {
+      const nextLetter = obscurifiedName[targetIndex];
+
+      if (nextLetter.letter === ")") {
+        closingParenthesisIndex = targetIndex;
+        break;
+      }
+    }
+
+    if (closingParenthesisIndex === 1) {
+      continue;
+    }
+
+    for (let j = currentLetterIndex; j <= closingParenthesisIndex; j++) {
+      const nextLetter = obscurifiedName[j];
+
+      nextLetter.isRevealed = true;
+    }
+  }
+
   return obscurifiedName;
 };
