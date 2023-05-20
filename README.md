@@ -5,6 +5,14 @@ After each round, you can see its info and get a link to its Wiki.
 
 It keeps total stats and every time you get a new Digimon!
 
+![Playing](https://github.com/themetalfleece/name-the-digimon/assets/19432855/753fc9f4-1a9c-43cd-bc4b-91969c674b01)
+![Victory screen](https://github.com/themetalfleece/name-the-digimon/assets/19432855/24c9a45d-64a1-42d7-adeb-94cf4fd4fcd2)
+
+## Acknowledgements
+This app is not affiliated with or endorsed by Bandai or the Digimon franchise. All trademarks and copyrights belong to their respective owners.
+
+This app came to life thanks to [DAPI](https://www.digi-api.com/) and [Wikimon](https://wikimon.net/).
+
 ## Usage
 
 This project is built with SolidJS.
