@@ -14,6 +14,7 @@ import { maxFailedAttempts } from "./round.constants";
 type RoundValue = {
   round: Round;
   selectLetter: (letter: string) => void;
+  nextRound: () => void;
 };
 
 const RoundContext = createContext<RoundValue>();
@@ -32,6 +33,8 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
   });
 
   const playNewDigimon = async () => {
+    setRound("state", "init");
+
     const digimon = {
       id: 946,
       name: "Garurumon",
@@ -120,9 +123,18 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
     }
   };
 
+  const nextRound = () => {
+    if (round.state !== "won" && round.state !== "lost") {
+      return;
+    }
+
+    playNewDigimon();
+  };
+
   const value: RoundValue = {
     round,
     selectLetter,
+    nextRound,
   };
 
   return (

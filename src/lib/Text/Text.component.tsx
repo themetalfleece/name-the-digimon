@@ -8,4 +8,5 @@ export interface TextProps {
 export const Text = styled("p")<TextProps>`
   color: ${(props) => props.theme!.colors[props.color || "white"]};
   font-size: ${(props) => props.fontSize || 16}px;
+  margin: 0;
 `;

@@ -3,6 +3,7 @@ import { Container, DigimonAvatar, Header } from "./Game.styles";
 import { useRound } from "../../features/round/round.store";
 import { GuessingName } from "../GuessingName/GuessingName.component";
 import { PlayingState } from "../PlayingState/PlayingState.component";
+import { FinishedState } from "../FinishedState/FinishedState.component";
 
 export const Game: Component = () => {
   const { round, selectLetter } = useRound();
@@ -22,6 +23,8 @@ export const Game: Component = () => {
         <GuessingName />
 
         <PlayingState />
+
+        <FinishedState />
       </Show>
     </Container>
   );
