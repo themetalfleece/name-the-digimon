@@ -1,10 +1,8 @@
 import { Component, Show } from "solid-js";
 import { Container, DigimonAvatar, Header } from "./Game.styles";
 import { useRound } from "../../features/round/round.store";
-import { OnScreenKeyboard } from "../../lib/OnScreenKeyboard/OnScreenKeyboard.component";
-import { Text } from "../../lib/Text/Text.component";
-import { maxFailedAttempts } from "../../features/round/round.constants";
 import { GuessingName } from "../GuessingName/GuessingName.component";
+import { PlayingState } from "../PlayingState/PlayingState.component";
 
 export const Game: Component = () => {
   const { round, selectLetter } = useRound();
@@ -23,17 +21,7 @@ export const Game: Component = () => {
 
         <GuessingName />
 
-        <OnScreenKeyboard
-          disabledLetters={round.guessedLetters}
-          onLetterSelected={selectLetter}
-        />
-
-        <Text
-          color={round.remainingAttempts > 1 ? "success" : "error"}
-          fontSize={28}
-        >
-          Security: {round.remainingAttempts}/{maxFailedAttempts}
-        </Text>
+        <PlayingState />
       </Show>
     </Container>
   );
