@@ -9,7 +9,9 @@ export const GuessingName = () => {
     <NameContainer>
       <For each={round.obscurifiedName}>
         {({ letter, isRevealed }): JSXElement => (
-          <Letter>{isRevealed ? letter : "_"}</Letter>
+          <Letter>
+            {round.state !== "playing" || isRevealed ? letter : "_"}
+          </Letter>
         )}
       </For>
     </NameContainer>

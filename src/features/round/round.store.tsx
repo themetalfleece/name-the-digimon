@@ -92,22 +92,30 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
       };
     });
 
-    setRound("obscurifiedName", obscurifiedName);
-
-    setRound({
-      guessedLetters: [...round.guessedLetters, letter.toLowerCase()],
-    });
-
-    if (!isLetterFound) {
+    if (isLetterFound) {
+      setRound("obscurifiedName", obscurifiedName);
+    } else {
       setRound((currentRound) => ({
         failedAttempts: currentRound.failedAttempts + 1,
         remainingAttempts: currentRound.remainingAttempts - 1,
       }));
     }
 
+    setRound({
+      guessedLetters: [...round.guessedLetters, letter.toLowerCase()],
+    });
+
     if (round.remainingAttempts <= 0) {
       setRound({
         state: "lost",
+      });
+    }
+
+    const isWon = round.obscurifiedName.every((entry) => entry.isRevealed);
+
+    if (isWon) {
+      setRound({
+        state: "won",
       });
     }
   };
