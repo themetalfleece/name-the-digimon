@@ -2,6 +2,8 @@ import { Component, For, JSXElement, Show } from "solid-js";
 import { Container, DigimonAvatar, Header, NameContainer } from "./Game.styles";
 import { useRound } from "../../features/round/round.store";
 import { OnScreenKeyboard } from "../OnScreenKeyboard/OnScreenKeyboard.component";
+import { Text } from "../Text/Text.component";
+import { maxFailedAttempts } from "../../features/round/round.constants";
 
 export const Game: Component = () => {
   const { round } = useRound();
@@ -26,6 +28,13 @@ export const Game: Component = () => {
         </NameContainer>
 
         <OnScreenKeyboard />
+
+        <Text
+          color={round.remainingAttempts === 1 ? "error" : "success"}
+          fontSize={28}
+        >
+          Security: {round.remainingAttempts}/{maxFailedAttempts}
+        </Text>
       </Show>
     </Container>
   );
