@@ -47,7 +47,7 @@ export const ProgressProvider = (props: ProgressProviderProps) => {
       setCorrectGuesses(existingCorrectGuesses => existingCorrectGuesses + 1);
     }
 
-    setPlayedIds(existingIds => [...existingIds, id]);
+    setPlayedIds(existingIds => [...new Set([...existingIds, id])]);
   };
 
   createEffect(() => {

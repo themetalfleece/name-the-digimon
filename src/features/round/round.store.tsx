@@ -28,7 +28,7 @@ export interface RoundProviderProps {
 }
 
 export const RoundProvider: Component<RoundProviderProps> = props => {
-  const { registerGuess } = useProgress();
+  const { playedIds, registerGuess } = useProgress();
 
   const [round, setRound] = createStore<Round>({
     obscurifiedName: [],
@@ -41,7 +41,7 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
   const playNewDigimon = async () => {
     setRound('state', 'init');
 
-    const digimonData = await fetchDigimonById(getRandomDigimonId());
+    const digimonData = await fetchDigimonById(getRandomDigimonId(playedIds()));
 
     const digimon: Round['digimon'] = {
       id: digimonData.id,
@@ -53,16 +53,14 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
       )?.description,
     };
 
-    setTimeout(() => {
-      setRound({
-        state: 'playing',
-        obscurifiedName: getObscurifiedName(digimon.name),
-        guessedLetters: [],
-        failedAttempts: 0,
-        remainingAttempts: maxFailedAttempts,
-        digimon,
-      });
-    }, 1000);
+    setRound({
+      state: 'playing',
+      obscurifiedName: getObscurifiedName(digimon.name),
+      guessedLetters: [],
+      failedAttempts: 0,
+      remainingAttempts: maxFailedAttempts,
+      digimon,
+    });
   };
 
   onMount(() => {
