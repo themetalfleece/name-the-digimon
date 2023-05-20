@@ -9,5 +9,6 @@ export interface Round {
   obscurifiedName: ObscurifiedName;
   guessedLetters: string[];
   failedAttempts: number;
+  remainingAttempts: number;
   state: "init" | "playing" | "won" | "lost";
 }

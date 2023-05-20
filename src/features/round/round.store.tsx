@@ -8,6 +8,7 @@ import {
 import { createStore } from "solid-js/store";
 import { Round } from "./round.type";
 import { getObscurifiedName } from "../obsurifiedName/getObscurifiedName.util";
+import { maxFailedAttempts } from "./round.constants";
 
 type RoundValue = {
   round: Round;
@@ -24,6 +25,7 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
     obscurifiedName: [],
     guessedLetters: [],
     failedAttempts: 0,
+    remainingAttempts: maxFailedAttempts,
     state: "init",
   });
 
@@ -40,6 +42,7 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
         obscurifiedName: getObscurifiedName(digimon.name),
         guessedLetters: [],
         failedAttempts: 0,
+        remainingAttempts: maxFailedAttempts,
         digimon,
       });
     }, 1000);
