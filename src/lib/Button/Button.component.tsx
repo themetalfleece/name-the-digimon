@@ -1,7 +1,7 @@
 import { styled } from 'solid-styled-components';
 
 export interface ButtonProps {
-  variant?: 'success';
+  variant?: 'success' | 'info';
 }
 
 export const Button = styled('button')<ButtonProps>`
@@ -12,6 +12,10 @@ export const Button = styled('button')<ButtonProps>`
 
     if (variant === 'success') {
       return theme!.colors.success;
+    }
+
+    if (variant === 'info') {
+      return theme!.colors.info;
     }
 
     return theme!.colors.white;

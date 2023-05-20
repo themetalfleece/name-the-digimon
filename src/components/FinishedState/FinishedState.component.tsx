@@ -3,6 +3,7 @@ import { useRound } from '../../features/round/round.store';
 import { Text } from '../../lib/Text/Text.component';
 import { Button } from '../../lib/Button/Button.component';
 import { DescriptionContainer } from './FinishedState.styles';
+import { getWikiUrl } from '../../features/wiki/getWikiUrl.util';
 
 export const FinishedState: Component = () => {
   const { round, nextRound } = useRound();
@@ -47,6 +48,10 @@ export const FinishedState: Component = () => {
           </Text>
         </DescriptionContainer>
       </Show>
+
+      <a target="_blank" href={getWikiUrl(round.digimon?.name ?? '')}>
+        <Button variant="info">Wiki</Button>
+      </a>
     </Show>
   );
 };
