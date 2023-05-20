@@ -4,6 +4,7 @@ import {
   JSXElement,
   Component,
   onMount,
+  createEffect,
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Round } from "./round.type";
@@ -29,7 +30,7 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
     state: "init",
   });
 
-  const start = async () => {
+  const playNewDigimon = async () => {
     const digimon = {
       id: 946,
       name: "Garurumon",
@@ -48,7 +49,20 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
     }, 1000);
   };
 
-  onMount(() => start());
+  onMount(() => {
+    const roundFromLocalStorage = localStorage.getItem("round");
+
+    if (roundFromLocalStorage) {
+      setRound(JSON.parse(roundFromLocalStorage));
+      return;
+    }
+
+    playNewDigimon();
+  });
+
+  createEffect(() => {
+    localStorage.setItem("round", JSON.stringify(round));
+  });
 
   const value: RoundValue = {
     round,

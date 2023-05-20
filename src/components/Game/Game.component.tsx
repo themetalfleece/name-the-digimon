@@ -12,9 +12,12 @@ export const Game: Component = () => {
   return (
     <Container>
       <Header>Name the Digimon</Header>
-      <Show when={round.digimon} fallback={<h2>Loading...</h2>}>
+      <Show
+        when={round.digimon && round.state !== "init"}
+        fallback={<h2>Loading...</h2>}
+      >
         <DigimonAvatar
-          src={round.digimon?.imageUrl}
+          src={round.digimon!.imageUrl}
           alt="Image of the Digimon to find"
         />
 
