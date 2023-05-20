@@ -1,5 +1,5 @@
 import { Component, Show } from 'solid-js';
-import { Container, DigimonAvatar, Header } from './Game.styles';
+import { Container, DigimonAvatar, Divider, Header } from './Game.styles';
 import { useRound } from '../../features/round/round.store';
 import { GuessingName } from '../GuessingName/GuessingName.component';
 import { PlayingState } from '../PlayingState/PlayingState.component';
@@ -26,6 +26,8 @@ export const Game: Component = () => {
         <PlayingState />
 
         <FinishedState />
+
+        <Divider />
 
         <ProgressSummary />
       </Show>

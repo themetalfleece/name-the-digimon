@@ -16,3 +16,7 @@ export const DigimonAvatar = styled('img')`
   width: 100%;
   max-width: 360px;
 `;
+
+export const Divider = styled('hr')`
+  width: 100%;
+`;
