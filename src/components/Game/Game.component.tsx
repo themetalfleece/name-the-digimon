@@ -1,7 +1,7 @@
 import { Component, For, JSXElement, Show } from "solid-js";
 import { Container, DigimonAvatar, Header, NameContainer } from "./Game.styles";
-import { getObscurifiedName } from "../../features/obsurifiedName/getObscurifiedName.util";
 import { useRound } from "../../features/round/round.store";
+import { OnScreenKeyboard } from "../OnScreenKeyboard/OnScreenKeyboard.component";
 
 export const Game: Component = () => {
   const { round } = useRound();
@@ -18,10 +18,14 @@ export const Game: Component = () => {
         <NameContainer>
           <For each={round.obscurifiedName}>
             {({ letter, isRevealed }): JSXElement => (
-              <div>{isRevealed ? letter : "_"}</div>
+              <div style={{ "font-weight": 500 }}>
+                {isRevealed ? letter : "_"}
+              </div>
             )}
           </For>
         </NameContainer>
+
+        <OnScreenKeyboard />
       </Show>
     </Container>
   );
