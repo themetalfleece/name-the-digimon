@@ -13,6 +13,7 @@ import { maxFailedAttempts } from './round.constants';
 import { fetchDigimonById } from '../digimon/fetchDigimon.util';
 import { getRandomDigimonId } from '../digimon/getRandomDigimonId.util';
 import { getEnglishName } from '../digimon/getEnglishName.util';
+import { useProgress } from '../progress/progress.store';
 
 type RoundValue = {
   round: Round;
@@ -27,6 +28,8 @@ export interface RoundProviderProps {
 }
 
 export const RoundProvider: Component<RoundProviderProps> = props => {
+  const { registerGuess } = useProgress();
+
   const [round, setRound] = createStore<Round>({
     obscurifiedName: [],
     guessedLetters: [],
@@ -78,7 +81,7 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
   });
 
   const selectLetter: RoundValue['selectLetter'] = (letter: string) => {
-    if (round.state !== 'playing') {
+    if (round.state !== 'playing' || !round.digimon) {
       return;
     }
 
@@ -121,6 +124,8 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
       setRound({
         state: 'lost',
       });
+
+      registerGuess(round.digimon.id, false);
     }
 
     const isWon = round.obscurifiedName.every(entry => entry.isRevealed);
@@ -129,6 +134,8 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
       setRound({
         state: 'won',
       });
+
+      registerGuess(round.digimon.id, true);
     }
   };
 
