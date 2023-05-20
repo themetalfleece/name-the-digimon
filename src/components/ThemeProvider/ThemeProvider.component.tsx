@@ -9,17 +9,13 @@ const theme = {
     error: "#f6214e",
     background: "#030303",
     white: "#fefefe",
+    black: "#030303",
   },
 };
 
 declare module "solid-styled-components" {
   export interface DefaultTheme {
-    colors: {
-      info: string;
-      success: string;
-      error: string;
-      background: string;
-    };
+    colors: typeof theme.colors;
   }
 }
 
@@ -33,6 +29,10 @@ const GlobalStyles = () => {
     body {
       color: ${theme.colors.white};
       background-color: ${theme.colors.background};
+    }
+
+    * {
+      font-family: 'Roboto Mono', monospace;
     }
   `;
   return <Styles />;
