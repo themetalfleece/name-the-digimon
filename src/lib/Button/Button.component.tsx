@@ -1,16 +1,16 @@
-import { styled } from "solid-styled-components";
+import { styled } from 'solid-styled-components';
 
 export interface ButtonProps {
-  variant?: "success";
+  variant?: 'success';
 }
 
-export const Button = styled("button")<ButtonProps>`
+export const Button = styled('button')<ButtonProps>`
   background-color: ${({ theme, disabled, variant }) => {
     if (disabled) {
       return theme!.colors.disabled;
     }
 
-    if (variant === "success") {
+    if (variant === 'success') {
       return theme!.colors.success;
     }
 
@@ -23,7 +23,7 @@ export const Button = styled("button")<ButtonProps>`
   font-size: 16px;
   box-sizing: border-box;
   cursor: pointer;
-  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
 
   &:hover {
     box-shadow: 0 0 0 1px ${({ theme }) => theme!.colors.white};

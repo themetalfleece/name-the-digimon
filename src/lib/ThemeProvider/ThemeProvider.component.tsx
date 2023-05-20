@@ -1,20 +1,20 @@
-import { Component, JSXElement } from "solid-js";
-import { ThemeProvider as StyledThemeProvider } from "solid-styled-components";
-import { createGlobalStyles } from "solid-styled-components";
+import { Component, JSXElement } from 'solid-js';
+import { ThemeProvider as StyledThemeProvider } from 'solid-styled-components';
+import { createGlobalStyles } from 'solid-styled-components';
 
 const theme = {
   colors: {
-    info: "#c8c6f3",
-    success: "#07eb0d",
-    error: "#f6214e",
-    background: "#030303",
-    white: "#fefefe",
-    black: "#030303",
+    info: '#c8c6f3',
+    success: '#07eb0d',
+    error: '#f6214e',
+    background: '#030303',
+    white: '#fefefe',
+    black: '#030303',
     disabled: `#9e9e9e`,
   },
 };
 
-declare module "solid-styled-components" {
+declare module 'solid-styled-components' {
   export interface DefaultTheme {
     colors: typeof theme.colors;
   }
@@ -39,7 +39,7 @@ const GlobalStyles = () => {
   return <Styles />;
 };
 
-export const ThemeProvider: Component<ThemeProviderProps> = (props) => {
+export const ThemeProvider: Component<ThemeProviderProps> = props => {
   return (
     <>
       <GlobalStyles />

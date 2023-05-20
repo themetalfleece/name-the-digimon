@@ -1,4 +1,4 @@
-import { ObscurifiedName } from "../obsurifiedName/obscurifiedName.type";
+import { ObscurifiedName } from '../obsurifiedName/obscurifiedName.type';
 
 export interface Round {
   digimon?: {
@@ -12,5 +12,5 @@ export interface Round {
   guessedLetters: string[];
   failedAttempts: number;
   remainingAttempts: number;
-  state: "init" | "playing" | "won" | "lost";
+  state: 'init' | 'playing' | 'won' | 'lost';
 }

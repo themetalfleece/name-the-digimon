@@ -1,8 +1,8 @@
-import { ObscurifiedName } from "./obscurifiedName.type";
+import { ObscurifiedName } from './obscurifiedName.type';
 
 export const getObscurifiedName = (name: string): ObscurifiedName => {
   // reveal all but letters
-  const obscurifiedName = name.split("").map((letter) => ({
+  const obscurifiedName = name.split('').map(letter => ({
     letter,
     isRevealed: !/[A-Za-z]/.test(letter),
   }));
@@ -15,10 +15,10 @@ export const getObscurifiedName = (name: string): ObscurifiedName => {
     const finalLetter = obscurifiedName[i + 3];
 
     if (
-      letter.letter === "m" &&
-      nextLetter.letter === "o" &&
-      nextNextLetter.letter === "n" &&
-      (!finalLetter || finalLetter.letter === " ")
+      letter.letter === 'm' &&
+      nextLetter.letter === 'o' &&
+      nextNextLetter.letter === 'n' &&
+      (!finalLetter || finalLetter.letter === ' ')
     ) {
       letter.isRevealed = true;
       nextLetter.isRevealed = true;
@@ -34,7 +34,7 @@ export const getObscurifiedName = (name: string): ObscurifiedName => {
   ) {
     const letter = obscurifiedName[currentLetterIndex];
 
-    if (letter.letter !== "(") {
+    if (letter.letter !== '(') {
       continue;
     }
 
@@ -46,7 +46,7 @@ export const getObscurifiedName = (name: string): ObscurifiedName => {
     ) {
       const nextLetter = obscurifiedName[targetIndex];
 
-      if (nextLetter.letter === ")") {
+      if (nextLetter.letter === ')') {
         closingParenthesisIndex = targetIndex;
         break;
       }

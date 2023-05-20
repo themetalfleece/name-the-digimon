@@ -1,7 +1,7 @@
-import { styled } from "solid-styled-components";
-import { Text } from "../../lib/Text/Text.component";
+import { styled } from 'solid-styled-components';
+import { Text } from '../../lib/Text/Text.component';
 
-export const NameContainer = styled("div")`
+export const NameContainer = styled('div')`
   display: flex;
   gap: 8px;
   justify-content: center;

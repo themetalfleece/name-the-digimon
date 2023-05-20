@@ -1,32 +1,32 @@
-import { Component, Show, onMount } from "solid-js";
-import { useRound } from "../../features/round/round.store";
-import { Text } from "../../lib/Text/Text.component";
-import { Button } from "../../lib/Button/Button.component";
-import { DescriptionContainer } from "./FinishedState.styles";
+import { Component, Show, onMount } from 'solid-js';
+import { useRound } from '../../features/round/round.store';
+import { Text } from '../../lib/Text/Text.component';
+import { Button } from '../../lib/Button/Button.component';
+import { DescriptionContainer } from './FinishedState.styles';
 
 export const FinishedState: Component = () => {
   const { round, nextRound } = useRound();
 
   onMount(() => {
     const callback = (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
+      if (event.key === 'Enter') {
         nextRound();
       }
     };
 
-    window.addEventListener("keydown", callback);
+    window.addEventListener('keydown', callback);
 
-    return () => window.removeEventListener("keydown", callback);
+    return () => window.removeEventListener('keydown', callback);
   });
 
   return (
-    <Show when={round.state === "won" || round.state === "lost"}>
-      <Show when={round.state === "won"}>
+    <Show when={round.state === 'won' || round.state === 'lost'}>
+      <Show when={round.state === 'won'}>
         <Text fontSize={28} color="success">
           Correct!
         </Text>
       </Show>
-      <Show when={round.state === "lost"}>
+      <Show when={round.state === 'lost'}>
         <Text fontSize={28} color="error">
           Incorrect!
         </Text>
@@ -37,7 +37,7 @@ export const FinishedState: Component = () => {
       </Button>
 
       <Text fontSize={26}>
-        #{round.digimon?.id} - {round.digimon?.level || "Unknown level"}
+        #{round.digimon?.id} - {round.digimon?.level || 'Unknown level'}
       </Text>
 
       <Show when={round.digimon?.description}>

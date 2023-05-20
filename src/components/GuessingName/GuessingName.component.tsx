@@ -1,6 +1,6 @@
-import { For, JSXElement } from "solid-js";
-import { useRound } from "../../features/round/round.store";
-import { Letter, NameContainer } from "./GuessingName.styles";
+import { For, JSXElement } from 'solid-js';
+import { useRound } from '../../features/round/round.store';
+import { Letter, NameContainer } from './GuessingName.styles';
 
 export const GuessingName = () => {
   const { round } = useRound();
@@ -10,7 +10,7 @@ export const GuessingName = () => {
       <For each={round.obscurifiedName}>
         {({ letter, isRevealed }): JSXElement => (
           <Letter>
-            {round.state !== "playing" || isRevealed ? letter : "_"}
+            {round.state !== 'playing' || isRevealed ? letter : '_'}
           </Letter>
         )}
       </For>

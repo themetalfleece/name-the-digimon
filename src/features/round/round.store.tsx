@@ -5,14 +5,14 @@ import {
   Component,
   onMount,
   createEffect,
-} from "solid-js";
-import { createStore } from "solid-js/store";
-import { Round } from "./round.type";
-import { getObscurifiedName } from "../obsurifiedName/getObscurifiedName.util";
-import { maxFailedAttempts } from "./round.constants";
-import { fetchDigimonById } from "../digimon/fetchDigimon.util";
-import { getRandomDigimonId } from "../digimon/getRandomDigimonId.util";
-import { getEnglishName } from "../digimon/getEnglishName.util";
+} from 'solid-js';
+import { createStore } from 'solid-js/store';
+import { Round } from './round.type';
+import { getObscurifiedName } from '../obsurifiedName/getObscurifiedName.util';
+import { maxFailedAttempts } from './round.constants';
+import { fetchDigimonById } from '../digimon/fetchDigimon.util';
+import { getRandomDigimonId } from '../digimon/getRandomDigimonId.util';
+import { getEnglishName } from '../digimon/getEnglishName.util';
 
 type RoundValue = {
   round: Round;
@@ -26,33 +26,33 @@ export interface RoundProviderProps {
   children: JSXElement;
 }
 
-export const RoundProvider: Component<RoundProviderProps> = (props) => {
+export const RoundProvider: Component<RoundProviderProps> = props => {
   const [round, setRound] = createStore<Round>({
     obscurifiedName: [],
     guessedLetters: [],
     failedAttempts: 0,
     remainingAttempts: maxFailedAttempts,
-    state: "init",
+    state: 'init',
   });
 
   const playNewDigimon = async () => {
-    setRound("state", "init");
+    setRound('state', 'init');
 
     const digimonData = await fetchDigimonById(getRandomDigimonId());
 
-    const digimon: Round["digimon"] = {
+    const digimon: Round['digimon'] = {
       id: digimonData.id,
       name: getEnglishName(digimonData.name),
-      imageUrl: digimonData.images?.[0]?.href || "",
-      level: digimonData.levels?.[0]?.level || "",
+      imageUrl: digimonData.images?.[0]?.href || '',
+      level: digimonData.levels?.[0]?.level || '',
       description: digimonData.descriptions?.find(
-        ({ language }: { language: string }) => language === "en_us"
+        ({ language }: { language: string }) => language === 'en_us',
       )?.description,
     };
 
     setTimeout(() => {
       setRound({
-        state: "playing",
+        state: 'playing',
         obscurifiedName: getObscurifiedName(digimon.name),
         guessedLetters: [],
         failedAttempts: 0,
@@ -63,7 +63,7 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
   };
 
   onMount(() => {
-    const roundFromLocalStorage = localStorage.getItem("round");
+    const roundFromLocalStorage = localStorage.getItem('round');
 
     if (roundFromLocalStorage) {
       setRound(JSON.parse(roundFromLocalStorage));
@@ -74,11 +74,11 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
   });
 
   createEffect(() => {
-    localStorage.setItem("round", JSON.stringify(round));
+    localStorage.setItem('round', JSON.stringify(round));
   });
 
-  const selectLetter: RoundValue["selectLetter"] = (letter: string) => {
-    if (round.state !== "playing") {
+  const selectLetter: RoundValue['selectLetter'] = (letter: string) => {
+    if (round.state !== 'playing') {
       return;
     }
 
@@ -88,7 +88,7 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
 
     let isLetterFound = false;
 
-    const obscurifiedName = round.obscurifiedName.map((entry) => {
+    const obscurifiedName = round.obscurifiedName.map(entry => {
       if (
         entry.isRevealed ||
         entry.letter.toLowerCase() !== letter.toLowerCase()
@@ -105,9 +105,9 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
     });
 
     if (isLetterFound) {
-      setRound("obscurifiedName", obscurifiedName);
+      setRound('obscurifiedName', obscurifiedName);
     } else {
-      setRound((currentRound) => ({
+      setRound(currentRound => ({
         failedAttempts: currentRound.failedAttempts + 1,
         remainingAttempts: currentRound.remainingAttempts - 1,
       }));
@@ -119,21 +119,21 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
 
     if (round.remainingAttempts <= 0) {
       setRound({
-        state: "lost",
+        state: 'lost',
       });
     }
 
-    const isWon = round.obscurifiedName.every((entry) => entry.isRevealed);
+    const isWon = round.obscurifiedName.every(entry => entry.isRevealed);
 
     if (isWon) {
       setRound({
-        state: "won",
+        state: 'won',
       });
     }
   };
 
   const nextRound = () => {
-    if (round.state !== "won" && round.state !== "lost") {
+    if (round.state !== 'won' && round.state !== 'lost') {
       return;
     }
 

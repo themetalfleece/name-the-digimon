@@ -1,7 +1,7 @@
-import { styled } from "solid-styled-components";
-import { Button } from "../Button/Button.component";
+import { styled } from 'solid-styled-components';
+import { Button } from '../Button/Button.component';
 
-export const Container = styled("div")`
+export const Container = styled('div')`
   display: flex;
   flex-wrap: wrap;
   max-width: 360px;
