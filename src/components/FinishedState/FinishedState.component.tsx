@@ -2,6 +2,7 @@ import { Component, Show, onMount } from "solid-js";
 import { useRound } from "../../features/round/round.store";
 import { Text } from "../../lib/Text/Text.component";
 import { Button } from "../../lib/Button/Button.component";
+import { DescriptionContainer } from "./FinishedState.styles";
 
 export const FinishedState: Component = () => {
   const { round, nextRound } = useRound();
@@ -34,6 +35,14 @@ export const FinishedState: Component = () => {
       <Button onClick={nextRound}>Continue</Button>
 
       <Text fontSize={26}>#946 - Adult</Text>
+
+      <Show when={round.digimon?.description}>
+        <DescriptionContainer>
+          <Text fontSize={16} textAlign="justify">
+            {round.digimon!.description}
+          </Text>
+        </DescriptionContainer>
+      </Show>
     </Show>
   );
 };
