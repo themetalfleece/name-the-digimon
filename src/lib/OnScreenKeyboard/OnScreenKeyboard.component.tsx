@@ -1,4 +1,4 @@
-import { Component } from "solid-js";
+import { Component, onMount } from "solid-js";
 import { Container, LetterButton } from "./OnScreenKeyboard.styles";
 
 export interface OnScreenKeyboardProps {
@@ -9,6 +9,19 @@ export interface OnScreenKeyboardProps {
 const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
 export const OnScreenKeyboard: Component<OnScreenKeyboardProps> = (props) => {
+  onMount(() => {
+    const callback = (event: KeyboardEvent) => {
+      const key = event.key.toLowerCase();
+      if (alphabet.includes(key)) {
+        props.onLetterSelected(key);
+      }
+    };
+
+    window.addEventListener("keydown", callback);
+
+    return () => window.removeEventListener("keydown", callback);
+  });
+
   return (
     <Container>
       {alphabet.map((letter) => (

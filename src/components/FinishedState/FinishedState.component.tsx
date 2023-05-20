@@ -1,10 +1,22 @@
-import { Component, Show } from "solid-js";
+import { Component, Show, onMount } from "solid-js";
 import { useRound } from "../../features/round/round.store";
 import { Text } from "../../lib/Text/Text.component";
 import { Button } from "../../lib/Button/Button.component";
 
 export const FinishedState: Component = () => {
   const { round, nextRound } = useRound();
+
+  onMount(() => {
+    const callback = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        nextRound();
+      }
+    };
+
+    window.addEventListener("keydown", callback);
+
+    return () => window.removeEventListener("keydown", callback);
+  });
 
   return (
     <Show when={round.state === "won" || round.state === "lost"}>
