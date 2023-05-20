@@ -1,5 +1,5 @@
 import { styled } from "solid-styled-components";
-import { Text } from "../Text/Text.component";
+import { Text } from "../../lib/Text/Text.component";
 
 export const NameContainer = styled("div")`
   display: flex;

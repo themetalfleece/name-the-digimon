@@ -1,8 +1,8 @@
 import { Component, Show } from "solid-js";
 import { Container, DigimonAvatar, Header } from "./Game.styles";
 import { useRound } from "../../features/round/round.store";
-import { OnScreenKeyboard } from "../OnScreenKeyboard/OnScreenKeyboard.component";
-import { Text } from "../Text/Text.component";
+import { OnScreenKeyboard } from "../../lib/OnScreenKeyboard/OnScreenKeyboard.component";
+import { Text } from "../../lib/Text/Text.component";
 import { maxFailedAttempts } from "../../features/round/round.constants";
 import { GuessingName } from "../GuessingName/GuessingName.component";
 
