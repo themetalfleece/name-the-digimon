@@ -12,6 +12,7 @@ import { getObscurifiedName } from "../obsurifiedName/getObscurifiedName.util";
 import { maxFailedAttempts } from "./round.constants";
 import { fetchDigimonById } from "../digimon/fetchDigimon.util";
 import { getRandomDigimonId } from "../digimon/getRandomDigimonId.util";
+import { getEnglishName } from "../digimon/getEnglishName.util";
 
 type RoundValue = {
   round: Round;
@@ -41,7 +42,7 @@ export const RoundProvider: Component<RoundProviderProps> = (props) => {
 
     const digimon: Round["digimon"] = {
       id: digimonData.id,
-      name: digimonData.name, // TODO use English translation
+      name: getEnglishName(digimonData.name),
       imageUrl: digimonData.images?.[0]?.href || "",
       level: digimonData.levels?.[0]?.level || "",
       description: digimonData.descriptions?.find(

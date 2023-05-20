@@ -37,7 +37,7 @@ export const FinishedState: Component = () => {
       </Button>
 
       <Text fontSize={26}>
-        #{round.digimon?.id} - {round.digimon?.level}
+        #{round.digimon?.id} - {round.digimon?.level || "Unknown level"}
       </Text>
 
       <Show when={round.digimon?.description}>
