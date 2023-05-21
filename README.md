@@ -3,7 +3,7 @@
 A game where you are presented with a Digimon image, and have to find its name like playing Hangman.
 After each round, you can see its info and get a link to its Wiki.
 
-It keeps total stats and every time you get a new Digimon!
+It keeps your progress and your total stats!
 
 ### You can play [here](https://digi.athanasoglou.gr/).
 
@@ -19,6 +19,7 @@ This app came to life thanks to [DAPI](https://www.digi-api.com/) and [Wikimon](
 
 This project is built with SolidJS.
 
+Install dependencies:
 ```bash
 yarn
 ```
