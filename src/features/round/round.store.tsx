@@ -41,35 +41,37 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
   const playNewDigimon = async () => {
     setRound('state', 'init');
 
-    let digimonData: any = null;
-    while (!digimonData) {
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
       const digimonId = getRandomDigimonId(playedIds());
+
       try {
-        digimonData = await fetchDigimonById(digimonId);
+        const digimonData = await fetchDigimonById(digimonId);
+        const digimon: Round['digimon'] = {
+          id: digimonData.id,
+          name: getEnglishName(digimonData.name),
+          imageUrl: digimonData.images?.[0]?.href || '',
+          level: digimonData.levels?.[0]?.level || '',
+          description: digimonData.descriptions?.find(
+            ({ language }: { language: string }) => language === 'en_us',
+          )?.description,
+        };
+
+        setRound({
+          state: 'playing',
+          obscurifiedName: getObscurifiedName(digimon.name),
+          guessedLetters: [],
+          failedAttempts: 0,
+          remainingAttempts: maxFailedAttempts,
+          digimon,
+        });
+
+        return;
       } catch (err) {
         console.error(`Error fetching Digimon data for id ${digimonId}`, err);
         await new Promise(resolve => setTimeout(resolve, 3000));
       }
     }
-
-    const digimon: Round['digimon'] = {
-      id: digimonData.id,
-      name: getEnglishName(digimonData.name),
-      imageUrl: digimonData.images?.[0]?.href || '',
-      level: digimonData.levels?.[0]?.level || '',
-      description: digimonData.descriptions?.find(
-        ({ language }: { language: string }) => language === 'en_us',
-      )?.description,
-    };
-
-    setRound({
-      state: 'playing',
-      obscurifiedName: getObscurifiedName(digimon.name),
-      guessedLetters: [],
-      failedAttempts: 0,
-      remainingAttempts: maxFailedAttempts,
-      digimon,
-    });
   };
 
   onMount(() => {
@@ -77,7 +79,10 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
 
     if (roundFromLocalStorage) {
       setRound(JSON.parse(roundFromLocalStorage));
-      return;
+
+      if (round.state !== 'init') {
+        return;
+      }
     }
 
     playNewDigimon();
