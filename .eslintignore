@@ -9,3 +9,4 @@ dist
 # test coverage
 coverage
 .eslintrc.js
+workbox-config.js
