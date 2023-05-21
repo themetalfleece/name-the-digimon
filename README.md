@@ -5,7 +5,7 @@ After each round, you can see its info and get a link to its Wiki.
 
 It keeps your progress and your total stats!
 
-### You can play [here](https://digi.athanasoglou.gr/).
+### You can play [here](https://digi.athanasoglou.gr/). You can also install it as a PWA.
 
 ![Playing](https://github.com/themetalfleece/name-the-digimon/assets/19432855/827af1e8-32f4-4978-b51a-995d735da594)
 ![Victory Screen](https://github.com/themetalfleece/name-the-digimon/assets/19432855/a1cd6555-b4a4-4229-bace-302f4ff43557)
