@@ -41,7 +41,16 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
   const playNewDigimon = async () => {
     setRound('state', 'init');
 
-    const digimonData = await fetchDigimonById(getRandomDigimonId(playedIds()));
+    let digimonData: any = null;
+    while (!digimonData) {
+      const digimonId = getRandomDigimonId(playedIds());
+      try {
+        digimonData = await fetchDigimonById(digimonId);
+      } catch (err) {
+        console.error(`Error fetching Digimon data for id ${digimonId}`, err);
+        await new Promise(resolve => setTimeout(resolve, 3000));
+      }
+    }
 
     const digimon: Round['digimon'] = {
       id: digimonData.id,
