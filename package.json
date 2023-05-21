@@ -5,7 +5,7 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npx workbox-cli generateSW workbox-config.js",
     "serve": "vite preview",
     "lint": "eslint --fix --quiet src/**/*.ts src/**/*.ts[x]",
     "format": "prettier --loglevel silent --write src/**/*.ts src/**/*.ts"
