@@ -18,7 +18,7 @@ export const getObscurifiedName = (name: string): ObscurifiedName => {
       letter.letter === 'm' &&
       nextLetter.letter === 'o' &&
       nextNextLetter.letter === 'n' &&
-      (!finalLetter || finalLetter.letter === ' ')
+      (!finalLetter || finalLetter.letter === ' ' || finalLetter.letter === '(')
     ) {
       letter.isRevealed = true;
       nextLetter.isRevealed = true;
