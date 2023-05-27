@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS digimon (
   wiki_id INTEGER NOT NULL,
   data TEXT NOT NULL,
   raw_data TEXT NOT NULL,
-  image_url TEXT NOT NULL,
+  image_id TEXT NOT NULL,
   created_at TEXT NOT NULL
 );
 
