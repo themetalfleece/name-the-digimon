@@ -18,4 +18,7 @@ This app came to life thanks to [DAPI](https://www.digi-api.com/) and [Wikimon](
 ## Development
 
 This is a monorepo. For more info, navigate to each project's README:
+
 [web-app](./packages/web-app/README.md)
+
+[scraper](./packages/scraper/README.md)
