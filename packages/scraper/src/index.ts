@@ -8,7 +8,11 @@ export interface Env {
 }
 
 export default {
-  async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
+  async scheduled(
+    _controller: ScheduledController,
+    env: Env,
+    _ctx: ExecutionContext,
+  ): Promise<void> {
     const lastWikiIdInDbRes = await env.DB.prepare(
       'SELECT wiki_id FROM digimon ORDER BY wiki_id DESC LIMIT 1',
     ).first<{
