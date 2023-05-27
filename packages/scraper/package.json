@@ -16,7 +16,7 @@
   "private": true,
   "scripts": {
     "start": "wrangler dev",
-    "deploy": "wrangler publish",
+    "deploy": "wrangler publish --env production",
     "schema:local": "wrangler d1 execute name-the-digimon --local --file=./src/schema.sql",
     "schema": "wrangler d1 execute name-the-digimon --file=./src/schema.sql"
   }
