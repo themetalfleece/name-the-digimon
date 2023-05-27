@@ -1,4 +1,4 @@
-name = "scraper"
+name = "name-the-digimon-scrapper"
 main = "src/index.ts"
 compatibility_date = "2023-05-27"
 
