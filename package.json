@@ -2,32 +2,11 @@
   "name": "name-the-digimon",
   "version": "0.0.0",
   "description": "A game where you have to find the name of Digimon from its picture",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build && npx workbox-cli generateSW workbox-config.js",
-    "serve": "vite preview",
-    "lint": "eslint --fix --quiet src/**/*.ts src/**/*.ts[x]",
-    "format": "prettier --loglevel silent --write src/**/*.ts src/**/*.ts"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "eslint": "^8.0.1",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-config-standard-with-typescript": "^34.0.1",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-solid": "^0.12.1",
-    "prettier": "^2.8.8",
-    "typescript": "*",
-    "vite": "^4.1.1",
-    "vite-plugin-solid": "^2.5.0"
-  },
-  "dependencies": {
-    "solid-js": "^1.6.10",
-    "solid-styled-components": "^0.28.5"
+    "web-app": "yarn workspace @name-the-digimon/web-app"
   }
 }
