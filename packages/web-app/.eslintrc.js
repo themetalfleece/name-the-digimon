@@ -16,8 +16,8 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json',
   },
+  ignorePatterns: ['.eslintrc.js'],
   rules: {
     '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
     '@typescript-eslint/no-explicit-any': ['off'],
