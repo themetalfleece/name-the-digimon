@@ -32,6 +32,10 @@ export default {
       )?.description,
     };
 
+    if (!digimonData?.id) {
+      return;
+    }
+
     let imageId = '';
     const apiImageUrl = digimonRawData.images?.[0]?.href;
     if (apiImageUrl) {
