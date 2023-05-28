@@ -5,18 +5,19 @@ compatibility_date = "2023-05-27"
 [triggers]
 crons = [ "* * * * *" ]
 
-[[d1_databases]]
-binding = "DB"
-database_name = "name-the-digimon"
-database_id = "17e5cd0c-9b38-44cf-9e64-43a35dd8b9cc"
+d1_databases = [
+  { binding = "DB", database_name = "name-the-digimon", database_id = "17e5cd0c-9b38-44cf-9e64-43a35dd8b9cc" },
+]
 
 [vars]
 ENVIRONMENT = "dev"
 
-[env.production.vars]
-ENVIRONMENT = "production"
-[env.staging.vars]
-ENVIRONMENT = "staging"
+[env.production]
+name = "name-the-digimon-scraper"
+vars = { ENVIRONMENT = "production" }
+d1_databases = [
+  { binding = "DB", database_name = "name-the-digimon", database_id = "17e5cd0c-9b38-44cf-9e64-43a35dd8b9cc" },
+]
 
 # The necessary secrets are:
 # - CLOUDFLARE_IMAGES_API_TOKEN

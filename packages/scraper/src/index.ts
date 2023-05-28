@@ -75,9 +75,9 @@ export default {
 
     await env.DB.prepare(
       `
-    	INSERT INTO digimon (wiki_id, data, raw_data, image_id, created_at)
-    	VALUES (?, ?, ?, ?, ?)
-    `,
+        INSERT INTO digimon (wiki_id, data, raw_data, image_id, created_at)
+        VALUES (?, ?, ?, ?, ?)
+      `,
     )
       .bind(
         wikiIdToFetch,
