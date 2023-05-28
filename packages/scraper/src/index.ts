@@ -27,6 +27,10 @@ export default {
       `https://digimon-api.com/api/v1/digimon/${wikiIdToFetch}`,
     ).then((res) => res.json());
 
+    if (!digimonRawData?.id) {
+      return;
+    }
+
     const digimonData = {
       id: digimonRawData.id,
       name: getEnglishName(digimonRawData.name),
@@ -36,37 +40,37 @@ export default {
       )?.description,
     };
 
-    if (!digimonData?.id) {
-      return;
-    }
-
     let imageId = '';
     const apiImageUrl = digimonRawData.images?.[0]?.href;
     if (apiImageUrl) {
-      const formData = new FormData();
-      formData.append('url', apiImageUrl);
-      formData.append('requireSignedURLs', 'false');
-      formData.append(
-        'metadata',
-        JSON.stringify({
-          source: 'name-the-digimon',
-          environment: env.ENVIRONMENT,
-          wikiId: wikiIdToFetch,
-        }),
-      );
+      try {
+        const formData = new FormData();
+        formData.append('url', apiImageUrl);
+        formData.append('requireSignedURLs', 'false');
+        formData.append(
+          'metadata',
+          JSON.stringify({
+            source: 'name-the-digimon',
+            environment: env.ENVIRONMENT,
+            wikiId: wikiIdToFetch,
+          }),
+        );
 
-      const response = await fetch(
-        `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/images/v1`,
-        {
-          body: formData,
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${env.CLOUDFLARE_IMAGES_API_TOKEN}`,
+        const response = await fetch(
+          `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/images/v1`,
+          {
+            body: formData,
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${env.CLOUDFLARE_IMAGES_API_TOKEN}`,
+            },
           },
-        },
-      );
+        );
 
-      imageId = (await response.json<any>()).result.id;
+        imageId = (await response.json<any>()).result?.id ?? '';
+      } catch (err) {
+        console.error('Upload failed', err);
+      }
     }
 
     await env.DB.prepare(
