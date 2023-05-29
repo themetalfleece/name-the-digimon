@@ -3,7 +3,7 @@ main = "src/index.ts"
 compatibility_date = "2023-05-27"
 
 [triggers]
-crons = [ "* * * * *" ]
+crons = [ "0 0 * * *" ]
 
 d1_databases = [
   { binding = "DB", database_name = "name-the-digimon", database_id = "17e5cd0c-9b38-44cf-9e64-43a35dd8b9cc" },
