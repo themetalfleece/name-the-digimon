@@ -17,3 +17,15 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_users_access_token ON users(access_token);
+
+CREATE TABLE IF NOT EXISTS guesses(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  digimon_id INTEGER NOT NULL,
+  guess TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  FOREIGN KEY(user_id) REFERENCES users(id),
+  FOREIGN KEY(digimon_id) REFERENCES digimon(id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_guesses_user_digimon ON guesses(user_id, digimon_id);

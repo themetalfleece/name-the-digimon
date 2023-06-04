@@ -1,10 +1,10 @@
 import { TRPCError } from '@trpc/server';
-import { User } from './user.type';
+import { UserEntity } from './user.entity';
 
 export const upsertUser = async (DB: D1Database, accessToken: string) => {
   const userRes = await DB.prepare(`SELECT * FROM users WHERE access_token = ?`)
     .bind(accessToken)
-    .all<User>();
+    .all<UserEntity>();
 
   const user = userRes.results?.[0];
 
@@ -16,7 +16,7 @@ export const upsertUser = async (DB: D1Database, accessToken: string) => {
     `INSERT INTO users (access_token, created_at) VALUES (?, ?) RETURNING id, access_token`,
   )
     .bind(accessToken, new Date().toISOString())
-    .all<User>();
+    .all<UserEntity>();
 
   const createdUser = insertResult.results?.[0];
 
