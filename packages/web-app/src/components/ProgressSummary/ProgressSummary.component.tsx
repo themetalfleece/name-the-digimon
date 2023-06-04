@@ -1,21 +1,31 @@
-import { Component } from 'solid-js';
-import { useProgress } from '../../features/progress/progress.store';
-import { totalDigimon } from '../../features/digimon/digimonStats.constants';
+import { Component, Switch, Match } from 'solid-js';
 import { Text } from '../../lib/Text/Text.component';
+import { createQuery } from '@tanstack/solid-query';
+import { trpc } from '../../api/trpc.util';
 
 export const ProgressSummary: Component = () => {
-  const { correctGuesses, totalGuesses, playedIds } = useProgress();
-
-  const digimonLeft = () => totalDigimon - playedIds().length;
-  const guessPercentage = () =>
-    Math.round((correctGuesses() / totalGuesses() || 0) * 100);
+  const query = createQuery({
+    queryFn: () => trpc.progress.get.query(),
+    queryKey: () => ['progress'],
+  });
 
   return (
-    <Text fontSize={20} color="info" textAlign="center">
-      Correct guesses: {correctGuesses()}/{totalGuesses()} ({guessPercentage()}
-      %)
-      <br />
-      {digimonLeft()} Digimon left!
-    </Text>
+    <Switch>
+      <Match when={query.isLoading}>
+        <span />
+      </Match>
+      <Match when={query.isError}>
+        <p>Error loading progress</p>
+      </Match>
+      <Match when={query.data}>
+        <Text fontSize={20} color="info" textAlign="center">
+          Correct guesses: {query.data!.correctGuesses}/
+          {query.data!.totalGuesses} ({query.data!.correctGuessPercentage}
+          %)
+          <br />
+          {query.data!.digimonRemaining} Digimon Remaining!
+        </Text>
+      </Match>
+    </Switch>
   );
 };

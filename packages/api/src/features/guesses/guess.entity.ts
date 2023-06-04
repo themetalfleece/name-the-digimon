@@ -1,7 +1,7 @@
-export interface GuessesEntity {
+export interface GuessEntity {
   id: number;
   user_id: number;
   digimon_id: number;
-  guess: string;
+  is_correct: number;
   created_at: string;
 }
