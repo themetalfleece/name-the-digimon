@@ -1,29 +1,26 @@
 import { Component, Switch, Match } from 'solid-js';
 import { Text } from '../../lib/Text/Text.component';
-import { createQuery } from '@tanstack/solid-query';
-import { trpc } from '../../api/trpc.util';
+import { createGetProgress } from '../../features/progress/progress.api';
 
 export const ProgressSummary: Component = () => {
-  const query = createQuery({
-    queryFn: () => trpc.progress.get.query(),
-    queryKey: () => ['progress'],
-  });
+  const progressQuery = createGetProgress();
 
   return (
     <Switch>
-      <Match when={query.isLoading}>
+      <Match when={progressQuery.isLoading}>
         <span />
       </Match>
-      <Match when={query.isError}>
+      <Match when={progressQuery.isError}>
         <p>Error loading progress</p>
       </Match>
-      <Match when={query.data}>
+      <Match when={progressQuery.data}>
         <Text fontSize={20} color="info" textAlign="center">
-          Correct guesses: {query.data!.correctGuesses}/
-          {query.data!.totalGuesses} ({query.data!.correctGuessPercentage}
+          Correct guesses: {progressQuery.data!.correctGuesses}/
+          {progressQuery.data!.totalGuesses} (
+          {progressQuery.data!.correctGuessPercentage}
           %)
           <br />
-          {query.data!.digimonRemaining} Digimon Remaining!
+          {progressQuery.data!.digimonRemaining} Digimon Remaining!
         </Text>
       </Match>
     </Switch>

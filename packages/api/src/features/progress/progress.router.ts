@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { t } from '../../trpc/trpc.util';
 
 export const progressRouter = t.router({
@@ -37,4 +38,24 @@ export const progressRouter = t.router({
       digimonRemaining,
     };
   }),
+  guess: t.procedure
+    .input(
+      z.object({
+        digimonId: z.number(),
+        isCorrect: z.boolean(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { id: userId } = ctx.user;
+      const { digimonId, isCorrect } = input;
+      const { DB } = ctx;
+
+      const guess = await DB.prepare(
+        'INSERT INTO guesses (user_id, digimon_id, is_correct, created_at) VALUES (?, ?, ?, ?)',
+      )
+        .bind(userId, digimonId, isCorrect ? 1 : 0, new Date().toISOString())
+        .run();
+
+      return { guess };
+    }),
 });
