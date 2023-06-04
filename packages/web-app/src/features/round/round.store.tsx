@@ -41,7 +41,7 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      const digimonId = getRandomDigimonId([1, 2, 3, 4]);
+      const digimonId = getRandomDigimonId();
 
       try {
         const digimonData = await fetchDigimonById(digimonId);
@@ -90,7 +90,7 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
     localStorage.setItem('round', JSON.stringify(round));
   });
 
-  const selectLetter: RoundValue['selectLetter'] = (letter: string) => {
+  const selectLetter: RoundValue['selectLetter'] = async (letter: string) => {
     if (round.state !== 'playing' || !round.digimon) {
       return;
     }
@@ -135,7 +135,7 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
         state: 'lost',
       });
 
-      registerGuess({
+      await registerGuess({
         digimonId: round.digimon.id,
         isCorrect: false,
       });
@@ -148,7 +148,7 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
         state: 'won',
       });
 
-      registerGuess({
+      await registerGuess({
         digimonId: round.digimon.id,
         isCorrect: true,
       });

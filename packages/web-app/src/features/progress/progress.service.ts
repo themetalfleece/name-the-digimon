@@ -10,10 +10,14 @@ export const createGetProgress = () => {
   });
 };
 
-export const registerGuess = (
+export const registerGuess = async (
   input: Parameters<typeof trpc.progress.guess.mutate>[0],
 ) => {
-  trpc.progress.guess.mutate(input);
+  try {
+    await trpc.progress.guess.mutate(input);
+  } catch (err) {
+    console.error('Error registering guess', err);
+  }
 
   queryClient.invalidateQueries(progressQueryKey);
 };
