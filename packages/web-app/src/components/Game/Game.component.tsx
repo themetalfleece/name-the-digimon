@@ -5,9 +5,16 @@ import { GuessingName } from '../GuessingName/GuessingName.component';
 import { PlayingState } from '../PlayingState/PlayingState.component';
 import { FinishedState } from '../FinishedState/FinishedState.component';
 import { ProgressSummary } from '../ProgressSummary/ProgressSummary.component';
+import { createQuery } from '@tanstack/solid-query';
+import { trpc } from '../../api/trpc.util';
 
 export const Game: Component = () => {
   const { round } = useRound();
+
+  const query = createQuery({
+    queryFn: () => trpc.getUserById.query('1'),
+    queryKey: () => ['user', '1'],
+  });
 
   return (
     <Container>
@@ -20,6 +27,8 @@ export const Game: Component = () => {
           src={round.digimon!.imageUrl}
           alt="Image of the Digimon to find"
         />
+
+        {query.data?.name}
 
         <GuessingName />
 

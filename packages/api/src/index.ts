@@ -1,12 +1,6 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `wrangler dev src/index.ts` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `wrangler deploy src/index.ts --name my-worker` to deploy your worker
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
+import { createContext } from './context';
+import { appRouter } from './router';
 
 export interface Env {
   // Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
@@ -28,6 +22,31 @@ export default {
     env: Env,
     ctx: ExecutionContext,
   ): Promise<Response> {
-    return new Response('Hello World!');
+    return fetchRequestHandler({
+      endpoint: '/trpc',
+      req: request,
+      router: appRouter,
+      responseMeta: (ctx) => {
+        const headers = {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Request-Method': '*',
+          'Access-Control-Allow-Methods': '*',
+          'Access-Control-Allow-Headers': '*',
+        };
+
+        // to handle OPTIONS
+        if (ctx.errors[0]?.code === 'METHOD_NOT_SUPPORTED') {
+          return {
+            status: 200,
+            headers,
+          };
+        }
+
+        return {
+          headers,
+        };
+      },
+      createContext,
+    });
   },
 };

@@ -851,6 +851,28 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@tanstack/query-core@4.29.11":
+  version "4.29.11"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.29.11.tgz#fa338f7d6897c6be5de6d8dabd603d9b78ee48c7"
+  integrity sha512-8C+hF6SFAb/TlFZyS9FItgNwrw4PMa7YeX+KQYe2ZAiEz6uzg6yIr+QBzPkUwZ/L0bXvGd1sufTm3wotoz+GwQ==
+
+"@tanstack/solid-query@^4.29.11":
+  version "4.29.11"
+  resolved "https://registry.yarnpkg.com/@tanstack/solid-query/-/solid-query-4.29.11.tgz#f1a2e5e80a2032a71bf6da57e50f86ecdae33885"
+  integrity sha512-YSMeHTyI72zbcPhRcK4d63oCdZvwPhvMM2Kx0baPNR8yvH9uqzjlHTqiPms7AVpFF9WGl0wtXUJBuLvRH9iahA==
+  dependencies:
+    "@tanstack/query-core" "4.29.11"
+
+"@trpc/client@^10.29.0":
+  version "10.29.0"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.29.0.tgz#d45d5c6f5271ca41179c0286c2fce604d0cb3b24"
+  integrity sha512-2a5+xJarQaQNnmMHP73LdShNPFoXwQhUBKEK7zs/Fqy75kYKtwkBnbPPef4nJpAdG3JW0kbm8vbZcQ8T91oG1A==
+
+"@trpc/server@^10.29.0":
+  version "10.29.0"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.29.0.tgz#69750aa3cc54f1fd841706fdf8cf443471701308"
+  integrity sha512-a/ZAc/TT6Cz0L/Ii4asJrgyclnNl/SiNeN+dZPVYJZlw7okeTdbHI1vePcQb/3+0GpwVQeSEkZpVpSgekH9YZQ==
+
 "@types/babel__core@^7.1.20":
   version "7.20.1"
   resolved "https://registry.npmjs.org/@types/babel__core/-/babel__core-7.20.1.tgz"
@@ -3073,6 +3095,11 @@ solid-styled-components@^0.28.5:
     csstype "^3.1.0"
     goober "^2.1.10"
 
+solid-trpc@^0.0.11-rc.3:
+  version "0.0.11-rc.3"
+  resolved "https://registry.yarnpkg.com/solid-trpc/-/solid-trpc-0.0.11-rc.3.tgz#c4e234eac128bc98702f17375a7855cdf16e48a5"
+  integrity sha512-6TocwqXMpnL+D5cCSXsv7gCthxC4GqqvdClY52mfLr4/q85H6laoEDkS/lBPT4yXaV5FlXVtpKwvqiq+rNrQbw==
+
 source-map-js@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz"
@@ -3550,4 +3577,9 @@ youch@^3.2.2:
 zod@^3.20.6:
   version "3.21.4"
   resolved "https://registry.npmjs.org/zod/-/zod-3.21.4.tgz"
+  integrity sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==
+
+zod@^3.21.4:
+  version "3.21.4"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.21.4.tgz#10882231d992519f0a10b5dd58a38c9dabbb64db"
   integrity sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==

@@ -4,17 +4,21 @@ import { ThemeProvider } from './lib/ThemeProvider/ThemeProvider.component';
 import { Game } from './components/Game/Game.component';
 import { RoundProvider } from './features/round/round.store';
 import { ProgressProvider } from './features/progress/progress.store';
+import { queryClient } from './api/trpc.util';
+import { QueryClientProvider } from '@tanstack/solid-query';
 
 export const App: Component = () => {
   return (
     <ThemeProvider>
-      <ProgressProvider>
-        <RoundProvider>
-          <Layout>
-            <Game />
-          </Layout>
-        </RoundProvider>
-      </ProgressProvider>
+      <QueryClientProvider client={queryClient}>
+        <ProgressProvider>
+          <RoundProvider>
+            <Layout>
+              <Game />
+            </Layout>
+          </RoundProvider>
+        </ProgressProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };
