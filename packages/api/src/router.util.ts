@@ -1,6 +1,6 @@
 import { initTRPC } from '@trpc/server';
 import { z } from 'zod';
-import { Context } from './context';
+import { Context } from './context.util';
 
 type User = {
   id: string;

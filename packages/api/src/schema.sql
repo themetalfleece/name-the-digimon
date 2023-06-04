@@ -9,3 +9,11 @@ CREATE TABLE IF NOT EXISTS digimon (
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_digimon_wiki_id ON digimon(wiki_id);
 CREATE INDEX IF NOT EXISTS idx_digimon_image_id ON digimon(image_id);
+
+CREATE TABLE IF NOT EXISTS users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  access_token TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_users_access_token ON users(access_token);

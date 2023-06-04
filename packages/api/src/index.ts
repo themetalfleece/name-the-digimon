@@ -1,17 +1,13 @@
 import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
-import { createContext } from './context';
-import { appRouter } from './router';
+import { createContext } from './context.util';
+import { appRouter } from './router.util';
 
 export interface Env {
   DB: D1Database;
 }
 
 export default {
-  async fetch(
-    request: Request,
-    env: Env,
-    ctx: ExecutionContext,
-  ): Promise<Response> {
+  async fetch(request: Request, env: Env): Promise<Response> {
     return fetchRequestHandler({
       endpoint: '/trpc',
       req: request,
@@ -36,7 +32,7 @@ export default {
           headers,
         };
       },
-      createContext,
+      createContext: (opts) => createContext({ ...opts, ...env }),
     });
   },
 };
