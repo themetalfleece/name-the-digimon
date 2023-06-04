@@ -9,6 +9,8 @@ Install dependencies:
 yarn
 ```
 
+Copy `.env.example` to `.env` and edit with your values.
+
 ## Available Scripts
 
 In the project directory, you can run:

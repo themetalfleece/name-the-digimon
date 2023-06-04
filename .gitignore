@@ -1,3 +1,5 @@
+.env
+
 # Javascript / Typescript
 node_modules
 dist
