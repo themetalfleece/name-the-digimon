@@ -16,7 +16,9 @@
   "private": true,
   "scripts": {
     "start": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "schema:local": "npx wrangler@latest d1 execute name-the-digimon --local --file=./src/schema.sql",
+    "schema": "npx wrangler@latest d1 execute name-the-digimon --file=./src/schema.sql"
   },
   "dependencies": {
     "@trpc/server": "^10.29.0",

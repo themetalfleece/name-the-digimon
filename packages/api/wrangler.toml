@@ -1,3 +1,21 @@
-name = "api"
+name = "name-the-digimon-api"
 main = "src/index.ts"
 compatibility_date = "2023-06-04"
+
+d1_databases = [
+  { binding = "DB", database_name = "name-the-digimon", database_id = "17e5cd0c-9b38-44cf-9e64-43a35dd8b9cc" },
+]
+
+[vars]
+ENVIRONMENT = "dev"
+
+[env.production]
+name = "name-the-digimon-api"
+vars = { ENVIRONMENT = "production" }
+d1_databases = [
+  { binding = "DB", database_name = "name-the-digimon", database_id = "17e5cd0c-9b38-44cf-9e64-43a35dd8b9cc" },
+]
+
+# The necessary secrets are:
+# - CLOUDFLARE_ACCOUNT_ID
+# Run `echo <VALUE> | wrangler secret put <NAME>` for each of these
