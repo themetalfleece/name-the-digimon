@@ -1,6 +1,6 @@
 import { TRPCError, inferAsyncReturnType } from '@trpc/server';
 import { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
-import { upsertUser } from './features/users/upsertUser.util';
+import { upsertUser } from '../features/users/upsertUser.util';
 
 export interface CreateContextArgs extends FetchCreateContextFnOptions {
   DB: D1Database;
