@@ -4,7 +4,7 @@ import { ThemeProvider } from './lib/ThemeProvider/ThemeProvider.component';
 import { Game } from './components/Game/Game.component';
 import { RoundProvider } from './features/round/round.store';
 import { ProgressProvider } from './features/progress/progress.store';
-import { queryClient } from './api/trpc.util';
+import { queryClient } from './services/trpc.util';
 import { QueryClientProvider } from '@tanstack/solid-query';
 
 export const App: Component = () => {

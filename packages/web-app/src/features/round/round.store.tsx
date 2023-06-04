@@ -14,7 +14,7 @@ import { fetchDigimonById } from '../digimon/fetchDigimon.util';
 import { getRandomDigimonId } from '../digimon/getRandomDigimonId.util';
 import { getEnglishName } from '../digimon/getEnglishName.util';
 import { useProgress } from '../progress/progress.store';
-import { registerGuess } from '../progress/progress.api';
+import { registerGuess } from '../progress/progress.service';
 
 type RoundValue = {
   round: Round;

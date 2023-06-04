@@ -1,6 +1,6 @@
 import { Component, Switch, Match } from 'solid-js';
 import { Text } from '../../lib/Text/Text.component';
-import { createGetProgress } from '../../features/progress/progress.api';
+import { createGetProgress } from '../../features/progress/progress.service';
 
 export const ProgressSummary: Component = () => {
   const progressQuery = createGetProgress();
