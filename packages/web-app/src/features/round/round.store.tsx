@@ -13,7 +13,6 @@ import { maxFailedAttempts } from './round.constants';
 import { fetchDigimonById } from '../digimon/fetchDigimon.util';
 import { getRandomDigimonId } from '../digimon/getRandomDigimonId.util';
 import { getEnglishName } from '../digimon/getEnglishName.util';
-import { useProgress } from '../progress/progress.store';
 import { registerGuess } from '../progress/progress.service';
 
 type RoundValue = {
@@ -29,8 +28,6 @@ export interface RoundProviderProps {
 }
 
 export const RoundProvider: Component<RoundProviderProps> = props => {
-  const { playedIds } = useProgress();
-
   const [round, setRound] = createStore<Round>({
     obscurifiedName: [],
     guessedLetters: [],
@@ -44,7 +41,7 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      const digimonId = getRandomDigimonId(playedIds());
+      const digimonId = getRandomDigimonId([1, 2, 3, 4]);
 
       try {
         const digimonData = await fetchDigimonById(digimonId);
