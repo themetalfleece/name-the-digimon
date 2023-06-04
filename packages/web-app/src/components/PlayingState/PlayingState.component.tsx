@@ -14,12 +14,12 @@ export const PlayingState: Component = () => {
         onLetterSelected={selectLetter}
       />
       <Text
-        color={round.remainingAttempts > 0 ? 'success' : 'error'}
+        color={round.remainingAttempts > 1 ? 'success' : 'error'}
         fontSize={28}
       >
-        {round.remainingAttempts === 0 && '⚠️'}
-        Security: {round.remainingAttempts}/{maxFailedAttempts}
-        {round.remainingAttempts === 0 && '⚠️'}
+        {round.remainingAttempts === 1 && '⚠️'}
+        Security: {round.remainingAttempts - 1}/{maxFailedAttempts - 1}
+        {round.remainingAttempts === 1 && '⚠️'}
       </Text>
     </Show>
   );

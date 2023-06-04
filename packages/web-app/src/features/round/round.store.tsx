@@ -11,8 +11,6 @@ import { Round } from './round.type';
 import { getObscurifiedName } from '../obsurifiedName/getObscurifiedName.util';
 import { maxFailedAttempts } from './round.constants';
 import { fetchDigimonById } from '../digimon/fetchDigimon.util';
-import { getRandomDigimonId } from '../digimon/getRandomDigimonId.util';
-import { getEnglishName } from '../digimon/getEnglishName.util';
 import { registerGuess } from '../progress/progress.service';
 
 type RoundValue = {
@@ -41,13 +39,14 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      const digimonId = getRandomDigimonId();
+      // random between 1 and 4
+      const digimonId = Math.floor(Math.random() * 4) + 1;
 
       try {
         const digimonData = await fetchDigimonById(digimonId);
         const digimon: Round['digimon'] = {
           id: digimonData.id,
-          name: getEnglishName(digimonData.name),
+          name: digimonData.name,
           imageUrl: digimonData.images?.[0]?.href || '',
           level: digimonData.levels?.[0]?.level || '',
           description: digimonData.descriptions?.find(
@@ -130,7 +129,7 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
       guessedLetters: [...round.guessedLetters, letter.toLowerCase()],
     });
 
-    if (round.remainingAttempts < 0) {
+    if (round.remainingAttempts <= 0) {
       setRound({
         state: 'lost',
       });
