@@ -30,6 +30,7 @@
   "dependencies": {
     "@tanstack/solid-query": "^4.29.11",
     "@trpc/client": "^10.29.0",
+    "@trpc/server": "^10.29.0",
     "solid-js": "^1.6.10",
     "solid-styled-components": "^0.28.5",
     "solid-trpc": "^0.0.11-rc.3"
