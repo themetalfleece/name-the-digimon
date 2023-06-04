@@ -50,12 +50,10 @@ export const progressRouter = t.router({
       const { digimonId, isCorrect } = input;
       const { DB } = ctx;
 
-      const guess = await DB.prepare(
+      await DB.prepare(
         'INSERT INTO guesses (user_id, digimon_id, is_correct, created_at) VALUES (?, ?, ?, ?)',
       )
         .bind(userId, digimonId, isCorrect ? 1 : 0, new Date().toISOString())
         .run();
-
-      return { guess };
     }),
 });
