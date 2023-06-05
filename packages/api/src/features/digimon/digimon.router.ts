@@ -26,6 +26,7 @@ export const digimonRouter = t.router({
         `
           SELECT id, data, image_id FROM digimon
           WHERE id NOT IN (SELECT digimon_id FROM guesses WHERE user_id = ?)
+          AND is_playable = 1
           ORDER BY RANDOM()
           LIMIT 1
         `,
@@ -38,7 +39,7 @@ export const digimonRouter = t.router({
       }
 
       const randomDigimon = await DB.prepare(
-        'SELECT id, data, image_id FROM digimon ORDER BY RANDOM() LIMIT 1',
+        'SELECT id, data, image_id FROM digimon WHERE is_playable = 1 ORDER BY RANDOM() LIMIT 1',
       ).first<DigimonEntity>();
 
       return toDigimon(ctx.CLOUDFLARE_ACCOUNT_HASH, randomDigimon);
