@@ -1,12 +1,15 @@
 import { TRPCError, inferAsyncReturnType } from '@trpc/server';
 import { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
 import { upsertUser } from '../features/users/upsertUser.util';
+import { Env } from '../index';
 
-export interface CreateContextArgs extends FetchCreateContextFnOptions {
-  DB: D1Database;
-}
+export interface CreateContextArgs extends FetchCreateContextFnOptions, Env {}
 
-export async function createContext({ req, DB }: CreateContextArgs) {
+export async function createContext({
+  req,
+  resHeaders: _resHeaders,
+  ...env
+}: CreateContextArgs) {
   const accessToken = req.headers.get('access-token');
 
   if (!accessToken) {
@@ -16,9 +19,9 @@ export async function createContext({ req, DB }: CreateContextArgs) {
     });
   }
 
-  const user = await upsertUser(DB, accessToken);
+  const user = await upsertUser(env.DB, accessToken);
 
-  return { DB, user };
+  return { user, ...env };
 }
 
 export type Context = inferAsyncReturnType<typeof createContext>;

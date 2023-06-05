@@ -10,8 +10,10 @@ import { createStore } from 'solid-js/store';
 import { Round } from './round.type';
 import { getObscurifiedName } from '../obsurifiedName/getObscurifiedName.util';
 import { maxFailedAttempts } from './round.constants';
-import { fetchDigimonById } from '../digimon/fetchDigimon.util';
 import { registerGuess } from '../progress/progress.service';
+import { createQuery } from '@tanstack/solid-query';
+import { trpc } from '../../services/trpc.util';
+import { digimonQueryKey } from '../digimon/digimon.service';
 
 type RoundValue = {
   round: Round;
@@ -34,41 +36,41 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
     state: 'init',
   });
 
-  const playNewDigimon = async () => {
-    setRound('state', 'init');
+  const digimonQuery = createQuery({
+    queryFn: () => trpc.digimon.getRandom.query(),
+    queryKey: () => digimonQueryKey,
+    retry: true,
+    retryDelay: (retryAttempt: number) => Math.min(retryAttempt * 1000, 7000),
+    get enabled() {
+      return round.state === 'fetching';
+    },
+  });
 
-    // eslint-disable-next-line no-constant-condition
-    while (true) {
-      // random between 1 and 4
-      const digimonId = Math.floor(Math.random() * 4) + 1;
-
-      try {
-        const digimonData = await fetchDigimonById(digimonId);
-        const digimon: Round['digimon'] = {
-          id: digimonData.id,
-          name: digimonData.name,
-          imageUrl: digimonData.images?.[0]?.href || '',
-          level: digimonData.levels?.[0]?.level || '',
-          description: digimonData.descriptions?.find(
-            ({ language }: { language: string }) => language === 'en_us',
-          )?.description,
-        };
-
-        setRound({
-          state: 'playing',
-          obscurifiedName: getObscurifiedName(digimon.name),
-          guessedLetters: [],
-          failedAttempts: 0,
-          remainingAttempts: maxFailedAttempts,
-          digimon,
-        });
-
-        return;
-      } catch (err) {
-        console.error(`Error fetching Digimon data for id ${digimonId}`, err);
-        await new Promise(resolve => setTimeout(resolve, 3000));
-      }
+  createEffect(() => {
+    if (!digimonQuery.data) {
+      return;
     }
+
+    const digimon: Round['digimon'] = {
+      id: digimonQuery.data.id,
+      name: digimonQuery.data.name,
+      imageUrl: digimonQuery.data.imageUrl,
+      level: digimonQuery.data.level,
+      description: digimonQuery.data.description,
+    };
+
+    setRound({
+      state: 'playing',
+      obscurifiedName: getObscurifiedName(digimon.name),
+      guessedLetters: [],
+      failedAttempts: 0,
+      remainingAttempts: maxFailedAttempts,
+      digimon,
+    });
+  });
+
+  const playNewDigimon = async () => {
+    setRound('state', 'fetching');
   };
 
   onMount(() => {

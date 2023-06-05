@@ -12,5 +12,5 @@ export interface Round {
   guessedLetters: string[];
   failedAttempts: number;
   remainingAttempts: number;
-  state: 'init' | 'playing' | 'won' | 'lost';
+  state: 'init' | 'fetching' | 'playing' | 'won' | 'lost';
 }
