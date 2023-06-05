@@ -1,0 +1,93 @@
+/* inspired by https://github.com/eric-edouard/react-pwa-install-prompt */
+
+import { createEffect, createSignal, onCleanup } from 'solid-js';
+
+const getStandalone = () =>
+  (navigator as { standalone?: boolean })?.standalone ||
+  window?.matchMedia('(display-mode: standalone)').matches;
+
+const createPWA = () => {
+  const [isInstallPromptSupported, setIsInstallPromptSupported] =
+    createSignal(false);
+
+  const [deferredEvent, setDeferredEvent] = createSignal<Event | null>(null);
+
+  const [isStandalone, setIsStandalone] = createSignal(getStandalone());
+
+  createEffect(() => {
+    const beforeinstallpromptHandler = (event: Event) => {
+      // Prevent install prompt from showing so we can prompt it later
+      event.preventDefault();
+
+      setIsInstallPromptSupported(true);
+      setDeferredEvent(event);
+      setIsStandalone(getStandalone());
+    };
+
+    const onAppInstalled = () => {
+      setTimeout(() => setIsStandalone(getStandalone()), 200);
+    };
+
+    const onMatchMedia = () => {
+      setIsStandalone(getStandalone());
+    };
+
+    // Listen on the installation prompt. If this listener is triggered,
+    // it means PWA install is possible.
+    window.addEventListener('beforeinstallprompt', beforeinstallpromptHandler);
+
+    // It's also possible to know when the user installed the app by
+    // listening the app installed event
+    window.addEventListener('appinstalled', onAppInstalled);
+
+    // On Chrome, when user opens the previous installed app
+    // from the website (via the shortcut in the address bar),
+    // we want to check again if the app is in standalone mode.
+    window
+      .matchMedia('(display-mode: standalone)')
+      .addEventListener('change', onMatchMedia);
+
+    onCleanup(() => {
+      // Cleanup event listeners
+      window.removeEventListener(
+        'beforeinstallprompt',
+        beforeinstallpromptHandler,
+      );
+
+      window.removeEventListener('appinstalled', onAppInstalled);
+
+      window
+        .matchMedia('(display-mode: standalone)')
+        .removeEventListener('change', onMatchMedia);
+    });
+  });
+
+  const promptInstall = async () => {
+    try {
+      const promptRes = await (
+        deferredEvent() as unknown as { prompt: () => { outcome: 'accepted' } }
+      ).prompt();
+
+      if (promptRes.outcome !== 'accepted') {
+        return false;
+      }
+
+      setIsStandalone(getStandalone());
+
+      return true;
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsInstallPromptSupported(false);
+      setDeferredEvent(null);
+    }
+  };
+
+  return {
+    isStandalone,
+    isInstallPromptSupported,
+    promptInstall,
+  };
+};
+
+export { createPWA };
