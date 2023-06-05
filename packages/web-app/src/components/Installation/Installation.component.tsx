@@ -7,6 +7,10 @@ export const Installation: Component = () => {
 
   const onClick = () => {
     if (isInstallPromptSupported() && !isStandalone()) {
+      alert(
+        'Press "Install" in the next dialog. After that, look for its icon on your home screen.',
+      );
+
       return promptInstall();
     }
 
