@@ -13,7 +13,9 @@ export const Game: Component = () => {
     <Container>
       <Header>Name the Digimon</Header>
       <Show
-        when={round.digimon && round.state !== 'init'}
+        when={
+          round.digimon && round.state !== 'init' && round.state !== 'fetching'
+        }
         fallback={<h2>Downloading Digimon Data...</h2>}
       >
         <DigimonAvatar

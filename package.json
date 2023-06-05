@@ -7,6 +7,8 @@
     "packages/*"
   ],
   "scripts": {
-    "web-app": "yarn workspace @name-the-digimon/web-app"
+    "web-app": "yarn workspace @name-the-digimon/web-app",
+    "api": "yarn workspace @name-the-digimon/api",
+    "scraper": "yarn workspace @name-the-digimon/scraper"
   }
 }

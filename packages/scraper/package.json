@@ -1,5 +1,5 @@
 {
-  "name": "scraper",
+  "name": "@name-the-digimon/scraper",
   "version": "0.0.0",
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230518.0",
@@ -15,9 +15,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "wrangler dev",
-    "deploy": "wrangler publish --env production",
-    "schema:local": "npx wrangler@latest d1 execute name-the-digimon --local --file=./src/schema.sql",
-    "schema": "npx wrangler@latest d1 execute name-the-digimon --file=./src/schema.sql"
+    "dev": "wrangler dev",
+    "deploy": "wrangler publish --env production"
   }
 }

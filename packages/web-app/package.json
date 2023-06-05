@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "description": "The web interface for the app",
   "scripts": {
-    "start": "vite",
     "dev": "vite",
     "build": "vite build && npx workbox-cli generateSW workbox-config.js",
-    "serve": "vite preview",
+    "preview": "vite preview",
     "lint": "eslint --fix --quiet src/**/*.ts src/**/*.ts[x]",
     "format": "prettier --loglevel silent --write src/**/*.ts src/**/*.ts"
   },
   "license": "MIT",
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230518.0",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.8.0",
@@ -27,7 +27,11 @@
     "vite-plugin-solid": "^2.5.0"
   },
   "dependencies": {
+    "@tanstack/solid-query": "^4.29.11",
+    "@trpc/client": "^10.29.0",
+    "@trpc/server": "^10.29.0",
     "solid-js": "^1.6.10",
-    "solid-styled-components": "^0.28.5"
+    "solid-styled-components": "^0.28.5",
+    "solid-trpc": "^0.0.11-rc.3"
   }
 }
