@@ -29,3 +29,5 @@ CREATE TABLE IF NOT EXISTS guesses(
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_guesses_user_digimon ON guesses(user_id, digimon_id);
+
+ALTER TABLE digimon ADD COLUMN is_playable INTEGER NOT NULL DEFAULT 1;
