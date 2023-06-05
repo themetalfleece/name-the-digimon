@@ -47,7 +47,7 @@ export const RoundProvider: Component<RoundProviderProps> = props => {
   });
 
   createEffect(() => {
-    if (!digimonQuery.data) {
+    if (!digimonQuery.data || !digimonQuery.dataUpdatedAt) {
       return;
     }
 

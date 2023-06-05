@@ -19,7 +19,7 @@ export const progressRouter = t.router({
       .first<{ total_guesses: number }>();
 
     const totalDigimon = await DB.prepare(
-      'SELECT count(id) as total_digimon FROM digimon',
+      'SELECT count(id) as total_digimon FROM digimon WHERE is_playable = 1',
     ).first<{ total_digimon: number }>();
 
     const correctGuesses = correctGuessesRes.correct_guesses ?? 0;
