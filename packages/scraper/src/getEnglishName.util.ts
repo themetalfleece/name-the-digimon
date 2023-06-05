@@ -371,7 +371,7 @@ const japaneseToEnglish: Record<string, string> = {
   Matadrmon: 'Matadormon',
   'Medieval Dukemon': 'MedievalDukemon',
   'Saint Galgomon': 'MegaGargomon',
-  'AtlurKabuterimon (Blue)': 'MegaKabuterimon (Blue)',
+  'Atlur Kabuterimon (Blue)': 'MegaKabuterimon (Blue)',
   'Atlur Kabuterimon (Red)': 'MegaKabuterimon (Red)',
   'Mega Seadramon': 'MegaSeadramon',
   'Mega Seadramon (X-Antibody)': 'MegaSeadramon X',
