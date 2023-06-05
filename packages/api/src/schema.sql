@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS digimon (
   data TEXT NOT NULL,
   raw_data TEXT NOT NULL,
   image_id TEXT NOT NULL,
-  created_at TEXT NOT NULL
+  created_at TEXT NOT NULL,
+  is_playable INTEGER NOT NULL DEFAULT 1
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_digimon_wiki_id ON digimon(wiki_id);
@@ -29,5 +30,3 @@ CREATE TABLE IF NOT EXISTS guesses(
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_guesses_user_digimon ON guesses(user_id, digimon_id);
-
-ALTER TABLE digimon ADD COLUMN is_playable INTEGER NOT NULL DEFAULT 1;
