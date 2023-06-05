@@ -75,8 +75,8 @@ export default {
 
     await env.DB.prepare(
       `
-        INSERT INTO digimon (wiki_id, data, raw_data, image_id, created_at)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO digimon (wiki_id, data, raw_data, image_id, is_playable, created_at)
+        VALUES (?, ?, ?, ?, ?, ?)
       `,
     )
       .bind(
@@ -84,6 +84,7 @@ export default {
         JSON.stringify(digimonData),
         JSON.stringify(digimonRawData),
         imageId,
+        imageId ? 1 : 0,
         new Date().toISOString(),
       )
       .run();
