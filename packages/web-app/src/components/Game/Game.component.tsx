@@ -5,6 +5,7 @@ import { GuessingName } from '../GuessingName/GuessingName.component';
 import { PlayingState } from '../PlayingState/PlayingState.component';
 import { FinishedState } from '../FinishedState/FinishedState.component';
 import { ProgressSummary } from '../ProgressSummary/ProgressSummary.component';
+import { Installation } from '../Installation/Installation.component';
 
 export const Game: Component = () => {
   const { round } = useRound();
@@ -32,6 +33,8 @@ export const Game: Component = () => {
         <Divider />
 
         <ProgressSummary />
+
+        <Installation />
       </Show>
     </Container>
   );
