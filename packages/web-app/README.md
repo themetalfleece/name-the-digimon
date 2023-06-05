@@ -15,7 +15,7 @@ Copy `.env.example` to `.env` and edit with your values.
 
 In the project directory, you can run:
 
-### `yarn dev` or `yarn start`
+### `yarn dev`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

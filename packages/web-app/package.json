@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "description": "The web interface for the app",
   "scripts": {
-    "start": "vite",
     "dev": "vite",
     "build": "vite build && npx workbox-cli generateSW workbox-config.js",
-    "serve": "vite preview",
+    "preview": "vite preview",
     "lint": "eslint --fix --quiet src/**/*.ts src/**/*.ts[x]",
     "format": "prettier --loglevel silent --write src/**/*.ts src/**/*.ts"
   },
