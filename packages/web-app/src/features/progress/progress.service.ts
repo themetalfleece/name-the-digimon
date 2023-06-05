@@ -1,5 +1,6 @@
 import { createQuery } from '@tanstack/solid-query';
-import { queryClient, trpc } from '../../services/trpc.util';
+import { trpc } from '../../services/trpc.util';
+import { queryClient } from '../../services/queryClient.util';
 
 const progressQueryKey = ['progress'];
 
